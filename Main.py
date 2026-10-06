@@ -5,10 +5,8 @@ from pathlib import Path
 from PIL import Image
 from TkinterGUISaturnTheme import apply_theme
 
-
-
 def select_folder():
-    folder = filedialog.askdirectory(title="Select PNG folder")
+    folder = filedialog.askdirectory(title="Select image folder")
 
     if folder:
         folder_var.set(folder)
@@ -34,12 +32,12 @@ def create_gif():
         return
 
     # Get PNG files
-    files = sorted(folder.glob("*.png"))
+    files = sorted(folder.glob("*.png" or "*.jpeg"))
 
     if not files:
         messagebox.showwarning(
-            "No PNG files",
-            "No PNG files were found in the selected folder."
+            "No image files",
+            "No image files were found in the selected folder."
         )
         return
 
@@ -103,7 +101,7 @@ folder_var = tk.StringVar()
 fps_var = tk.StringVar(value="10")
 
 # ttk widgets to match modern Tk styling
-ttk.Label(root, text="PNG Folder:").pack(anchor="w", padx=20, pady=(20, 5))
+ttk.Label(root, text="Folder:").pack(anchor="w", padx=20, pady=(20, 5))
 
 folder_frame = ttk.Frame(root)
 folder_frame.pack(fill="x", padx=20)
